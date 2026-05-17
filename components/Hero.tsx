@@ -79,7 +79,7 @@ const Hero = () => {
               View My Work
             </Link>
             <Link
-              href="/resume.pdf"
+              href="/Bineesh_KS_Resume_ATS.docx"
               className="border border-white/20 hover:border-violet text-white px-8 py-4 rounded-xl font-bold transition-all hover:bg-white/5"
             >
               Download Resume
