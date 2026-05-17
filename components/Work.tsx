@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects, Project } from "@/data/projects";
-import { ExternalLink, X, Instagram, Globe, TrendingUp, Sparkles, CheckCircle2, ArrowUpRight } from "lucide-react";
+import { ExternalLink, X, TrendingUp, Sparkles, CheckCircle2, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
