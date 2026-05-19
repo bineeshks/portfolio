@@ -33,7 +33,7 @@ const About = () => {
                 <span className="text-sm font-bold text-green-500">Available for Work</span>
               </div>
               <div className="bg-violet/10 backdrop-blur-md border border-violet/20 px-6 py-3 rounded-2xl flex items-center gap-2 shadow-2xl">
-                <span className="text-sm font-bold text-white">Based in Kerala &rarr; Kochi</span>
+                <span className="text-sm font-bold text-white">Based in Kerala</span>
               </div>
             </div>
           </motion.div>
