@@ -20,11 +20,49 @@ export interface Project {
   accentColor?: string;
   instagramImage?: string;
   gallery?: string[];
+  videos?: string[];
 }
 
 export const projects: Project[] = [
   {
     id: 1,
+    category: "Video",
+    headerTag: "Video Production",
+    title: "Travel & Resort Branding — PrestiGo & Amani",
+    subtitle: "Tourism Marketing · Kerala · Video & Design",
+    description: "Cinematic resort reels and promotional campaign posters created for PrestiGo Holidays and Amani Tourism across Kerala.",
+    overview: "I managed the digital presence and creative design for premium travel agencies PrestiGo Holidays and Amani Tourism. I captured vertical cinematic reels of scenic pool villas and designed luxury campaign posters to drive honeymoon packages and booking inquiries.",
+    stats: [
+      { label: "Format", value: "9:16 Vertical" },
+      { label: "Videos Created", value: "5 Reels" },
+      { label: "Design Work", value: "Posters (2 Campaigns)" },
+      { label: "Locations", value: "Munnar, Wayanad, Vagamon, Kakkadampoyil" }
+    ],
+    role: [
+      { title: "Videography", desc: "Shot high-resolution cinematic reels highlighting scenic infinity pools, villas, and landscapes" },
+      { title: "Social Media Design", desc: "Created promotional poster designs incorporating brand fonts, call-to-actions, and contact details" },
+      { title: "Post-Processing", desc: "Color grading, sound design, and editing tailored for travel reels" }
+    ],
+    tools: ["CapCut", "Photoshop", "Lightroom", "Premiere Pro", "Mobile Videography"],
+    tags: ["PrestiGo Holidays", "Amani Tourism", "Resort Reels", "Poster Design", "Kerala Tourism"],
+    result: "SMM & Production ✦",
+    results: "Successfully launched travel campaigns featuring 5 high-quality cinematic reels and custom promotional designs, significantly boosting direct inquiries and booking rates for PrestiGo Holidays and Amani Tourism.",
+    image: "/design/resort.jpeg",
+    accentColor: "#8B5CF6",
+    gallery: [
+      "/design/resort.jpeg",
+      "/design/resort1.jpeg"
+    ],
+    videos: [
+      "/videos/resort.MP4",
+      "/videos/resort2.MP4",
+      "/videos/resort3.MP4",
+      "/videos/IMG_7304.MP4",
+      "/videos/IMG_7307.MP4"
+    ]
+  },
+  {
+    id: 2,
     category: "SMM",
     headerTag: "Social Media Management",
     title: "elaVate — Brand Content & Social Strategy",
@@ -56,7 +94,7 @@ export const projects: Project[] = [
     instagramImage: "/elavate.jpeg"
   },
   {
-    id: 2,
+    id: 3,
     category: "SMM",
     headerTag: "Social Media Management",
     title: "K Shack Cafe — Instagram Branding & Content",
@@ -87,7 +125,7 @@ export const projects: Project[] = [
     instagramImage: "/kshack.jpeg"
   },
   {
-    id: 3,
+    id: 4,
     category: "Design",
     headerTag: "Graphic Design",
     title: "Creative Design Showcase",
@@ -130,7 +168,7 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     category: "Web Dev",
     headerTag: "Website Development",
     title: "Skywyn — Real Estate & Land Development",

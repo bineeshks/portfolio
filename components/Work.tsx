@@ -104,12 +104,10 @@ const Work = () => {
                     
                     {/* Hover Overlay */}
                     <div 
-                      className={cn(
-                        "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-8 text-center",
-                        project.title.includes("elaVate") 
-                          ? "bg-gradient-to-br from-[#006D32]/90 to-[#004d23]/95" 
-                          : "bg-gradient-to-br from-[#D4AF37]/90 to-[#b8952e]/95"
-                      )}
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-8 text-center"
+                      style={{
+                        background: `linear-gradient(135deg, ${(project.accentColor || '#8B5CF6')}e6, ${(project.accentColor || '#8B5CF6')}f2)`
+                      }}
                     >
                       <div className="bg-white text-navy px-6 py-3 rounded-xl font-bold flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                         View Case Study <ExternalLink size={16} />
@@ -204,13 +202,21 @@ const Work = () => {
                   </div>
 
                   {/* Hero Image */}
-                  <div className="relative aspect-[21/9] rounded-[2.5rem] overflow-hidden mb-20 border border-white/10 shadow-2xl">
+                  <div className={cn(
+                    "relative rounded-[2.5rem] overflow-hidden mb-20 border border-white/10 shadow-2xl bg-black/40",
+                    selectedProject.category === "Video" || selectedProject.category === "Design"
+                      ? "aspect-[4/3] md:aspect-[16/10] max-h-[60vh] flex items-center justify-center"
+                      : "aspect-[21/9]"
+                  )}>
                     {selectedProject.image && (
                       <Image
                         src={selectedProject.image}
                         alt={selectedProject.title}
                         fill
-                        className="object-cover"
+                        className={cn(
+                          "object-cover",
+                          (selectedProject.category === "Video" || selectedProject.category === "Design") && "object-contain"
+                        )}
                       />
                     )}
                   </div>
@@ -252,7 +258,74 @@ const Work = () => {
                           <div className="w-8 h-px bg-violet/30" /> Visual Showcase
                         </h3>
                         
-                        {selectedProject.gallery ? (
+                        {selectedProject.videos ? (
+                          <div className="space-y-16">
+                            {selectedProject.gallery ? (
+                              <div className="border-b border-white/5 pb-12">
+                                <h4 className="text-sm font-bold text-white/60 mb-6 uppercase tracking-wider">Promotional Campaign Posters</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                                  {selectedProject.gallery.map((img, i) => (
+                                    <div key={i} className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+                                      <Image
+                                        src={img}
+                                        alt={`Campaign Poster ${i + 1}`}
+                                        width={600}
+                                        height={800}
+                                        className="w-full h-auto object-cover"
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            ) : selectedProject.image ? (
+                              <div className="border-b border-white/5 pb-12">
+                                <h4 className="text-sm font-bold text-white/60 mb-6 uppercase tracking-wider">Promotional Campaign Poster</h4>
+                                <div className="max-w-md mx-auto relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+                                  <Image
+                                    src={selectedProject.image}
+                                    alt="Campaign Poster"
+                                    width={600}
+                                    height={800}
+                                    className="w-full h-auto object-cover"
+                                  />
+                                </div>
+                              </div>
+                            ) : null}
+
+                            {/* Videos Grid */}
+                            <div>
+                              <h4 className="text-sm font-bold text-white/60 mb-6 uppercase tracking-wider">Cinematic Reels</h4>
+                              <div className={cn(
+                                "grid gap-8 justify-items-center w-full",
+                                selectedProject.videos.length === 2 
+                                  ? "grid-cols-1 md:grid-cols-2" 
+                                  : selectedProject.videos.length === 3 
+                                  ? "grid-cols-1 md:grid-cols-3" 
+                                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+                              )}>
+                                {selectedProject.videos.map((vid, i) => (
+                                  <div key={i} className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-black group flex flex-col w-full">
+                                    <div className="relative overflow-hidden bg-black flex items-center justify-center aspect-[9/16]">
+                                      <video
+                                        src={vid}
+                                        controls
+                                        playsInline
+                                        preload="metadata"
+                                        className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                  <div className="p-4 bg-white/5 border-t border-white/10 text-center mt-auto">
+                                    <span className="text-xs text-white/50 font-bold uppercase tracking-widest">
+                                      Resort Reel 0{i + 1}
+                                    </span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : selectedProject.gallery ? (
+
                           <div className="columns-1 md:columns-2 gap-6 space-y-6">
                             {selectedProject.gallery.map((img, i) => (
                               <div key={i} className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl break-inside-avoid group">

@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Stats = () => {
   const stats = [
-    { number: 6, suffix: "+", label: "Months Experience" },
+    { number: 1, suffix: "+", label: "year Freelance Experience" },
     { number: 10, suffix: "+", label: "Clients Worked With" },
     { number: 50, suffix: "+", label: "Reels & Videos Created" },
     { number: 100, suffix: "+", label: "Designs Delivered" },
@@ -19,10 +19,10 @@ const Stats = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const counters = document.querySelectorAll(".counter-value");
-      
+
       counters.forEach((counter) => {
         const target = parseInt(counter.getAttribute("data-target") || "0");
-        
+
         gsap.to(counter, {
           innerText: target,
           duration: 2,

@@ -58,7 +58,7 @@ const About = () => {
                 I&apos;m Bineesh K S, a Growth Marketer and Digital Strategist focused on driving brand growth through strategic content, organic marketing, and AI-powered visual storytelling. 
               </p>
               <p>
-                Whether it&apos;s managing cloud kitchens remotely or building local cafe identities, I bridge the gap between creative aesthetics and business results. I don&apos;t just create content; I build digital ecosystems that generate leads, increase footfall, and scale brands.
+                From producing high-end cinematic resort reels and travel branding to managing remote cloud kitchens, I bridge the gap between creative aesthetics and business results. I don&apos;t just create content; I build digital ecosystems that generate leads, increase footfall, and scale brands.
               </p>
               <p className="font-bold text-white">
                 Currently open to full-time agency roles in Kochi or remote opportunities.
@@ -71,7 +71,7 @@ const About = () => {
                 <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-violet border-4 border-navy" />
                 <span className="text-xs font-bold text-violet uppercase tracking-widest block mb-1">2024 — Present</span>
                 <h4 className="text-xl font-syne font-bold">Freelance Digital Marketer</h4>
-                <p className="text-sm text-white/40 mt-1">Helping local brands scale through content and ads.</p>
+                <p className="text-sm text-white/40 mt-1">Specializing in travel/resort branding, SMM campaigns, content production, and organic reach.</p>
               </div>
               <div className="relative">
                 <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-white/20 border-4 border-navy" />
