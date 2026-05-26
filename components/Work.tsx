@@ -7,6 +7,174 @@ import { ExternalLink, X, TrendingUp, Sparkles, CheckCircle2, ArrowUpRight } fro
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
+const videoItems = [
+  {
+    src: "/videos/resort.MP4",
+    title: "Luxury Pool Villa Reel",
+    location: "Kakkadampoyil, Kerala"
+  },
+  {
+    src: "/videos/resort2.MP4",
+    title: "Scenic Infinity Pool Reel",
+    location: "Vagamon, Kerala"
+  },
+  {
+    src: "/videos/resort3.MP4",
+    title: "Munnar Tea Garden Resort Reel",
+    location: "Munnar, Kerala"
+  },
+  {
+    src: "/videos/IMG_7304.MP4",
+    title: "Premium Honeymoon Cottage Reel",
+    location: "Wayanad, Kerala"
+  },
+  {
+    src: "/videos/IMG_7307.MP4",
+    title: "Wayanad Luxury Villa Reel",
+    location: "Wayanad, Kerala"
+  }
+];
+
+interface VideoCardProps {
+  src: string;
+  title: string;
+  location: string;
+  index: number;
+  onOpenCaseStudy: () => void;
+}
+
+const VideoCard: React.FC<VideoCardProps> = ({ src, title, location, index, onOpenCaseStudy }) => {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current && !isPlaying) {
+      videoRef.current.muted = true;
+      setIsMuted(true);
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(err => {
+        console.log("Autoplay blocked: ", err);
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+      videoRef.current.muted = true;
+      setIsMuted(true);
+    }
+  };
+
+  const handleCardClick = () => {
+    if (videoRef.current) {
+      if (isPlaying && !isMuted) {
+        // If playing with sound, pause it
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        // If paused or muted, play it and unmute it
+        videoRef.current.muted = false;
+        setIsMuted(false);
+        videoRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch(err => {
+          console.log("Play failed: ", err);
+        });
+      }
+    }
+  };
+
+  const handleCaseStudyClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent play/pause toggle
+    onOpenCaseStudy();
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent play/pause toggle
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 shadow-2xl flex flex-col w-full hover:border-violet/50 hover:-translate-y-2 transition-all duration-500 cursor-pointer"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleCardClick}
+    >
+      <div className="relative overflow-hidden bg-black flex items-center justify-center aspect-[9/16] w-full">
+        <video
+          ref={videoRef}
+          src={src}
+          loop
+          muted={isMuted}
+          playsInline
+          preload="metadata"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        
+        {/* Play/Pause Hover Overlay Indicators */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300 pointer-events-none" />
+
+        {/* Floating Controls */}
+        <div className="absolute top-4 right-4 z-10 flex gap-2">
+          {/* Mute/Unmute Toggle */}
+          {isPlaying && (
+            <button
+              onClick={toggleMute}
+              className="w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md flex items-center justify-center text-white transition-all border border-white/10"
+              title={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              )}
+            </button>
+          )}
+        </div>
+
+        {/* Hover Hint Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div className="w-12 h-12 rounded-full bg-violet/85 backdrop-blur-md flex items-center justify-center text-white border border-white/20 shadow-lg scale-90 group-hover:scale-100 transition-transform">
+            {isPlaying && !isMuted ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="4" x2="18" y2="20"/><line x1="6" y1="4" x2="6" y2="20"/></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="ml-1"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            )}
+          </div>
+        </div>
+
+        {/* Info Overlay at Bottom */}
+        <div className="absolute bottom-0 inset-x-0 p-6 flex flex-col justify-end z-10 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+          <span className="text-[9px] text-cyan font-bold tracking-widest uppercase mb-1">
+            {location}
+          </span>
+          <h4 className="text-base font-syne font-bold text-white mb-1 leading-snug drop-shadow-md">
+            {title}
+          </h4>
+          <button 
+            onClick={handleCaseStudyClick}
+            className="mt-2 self-start px-3 py-1 bg-white/10 hover:bg-violet hover:text-white rounded-full text-[9px] text-white/70 font-bold uppercase tracking-wider flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300 border border-white/5"
+          >
+            View Case Study <ArrowUpRight size={10} />
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const Work = () => {
   const [filter, setFilter] = useState<string>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -60,19 +228,39 @@ const Work = () => {
         </div>
 
         {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className={cn(
+          "grid gap-8 transition-all duration-500",
+          filter === "Video"
+            ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+            : "grid-cols-1 md:grid-cols-2"
+        )}>
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
+            {filter === "Video" ? (
+              videoItems.map((video, idx) => (
+                <VideoCard
+                  key={video.src}
+                  src={video.src}
+                  title={video.title}
+                  location={video.location}
+                  index={idx}
+                  onOpenCaseStudy={() => {
+                    const videoProject = projects.find(p => p.category === "Video");
+                    if (videoProject) setSelectedProject(videoProject);
+                  }}
+                />
+              ))
+            ) : (
+              filteredProjects.map((project, idx) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="group relative cursor-pointer"
+                  onClick={() => setSelectedProject(project)}
+                >
                 <div className="h-full bg-white/5 rounded-3xl overflow-hidden border border-white/10 transition-all duration-500 group-hover:border-violet/50 group-hover:-translate-y-2 flex flex-col">
                   <div className="aspect-[16/10] relative overflow-hidden shrink-0">
                     {project.image ? (
@@ -133,7 +321,7 @@ const Work = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )))}
           </AnimatePresence>
         </div>
       </div>
